@@ -67,10 +67,6 @@ void CtJ::SaveAsJson(const std::vector<std::string>& head, const std::vector<std
 
     std::cout << "proccessing..." << std::endl;
     for (const auto& row : rows_vector) {
-        if (row.size() != head.size()) {
-            continue; //  mismatched row size skipping
-        }
-
         json obj;
         for (size_t i = 0; i < head.size(); ++i) {
             std::string key = head[i];
