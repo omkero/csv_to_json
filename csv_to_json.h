@@ -10,8 +10,8 @@ namespace CsvToJson {
         CtJ();
         void ExtractWords(std::string line, std::vector<std::string> &words, char* seperator);
         void ExtractHeaders(std::string line, std::vector<std::string> &head, char* seperator);
-        void PrintOut(std::vector<std::string> &head, std::vector<std::string> &words);
-        void SaveAsJson();
+        void PrintOut(std::vector<std::string> &head, std::vector<std::string> &rows);
+        void SaveAsJson(const std::vector<std::string>& head, const std::vector<std::vector<std::string>>& rows_vector);
     };
 }
 

@@ -3,11 +3,10 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <thread>
 
 #define MISSING_ERR "Missing file_path"
 #define INVALID_FILE_ERR "Invalid file format its must be .csv"
-#define MISSING_COMMA_COMMAND "Missing -comma command"
+#define MISSING_COMMA_COMMAND "Missing -seperator command"
 #define MISSING_COMMAND "Missing command"
 
 int main (int argc, char* argv[])
@@ -25,7 +24,7 @@ int main (int argc, char* argv[])
         std::cout << INVALID_FILE_ERR << std::endl;
         return -1;
     }
-    if (command.find("-comma") == std::string::npos) {
+    if (command.find("-seperator") == std::string::npos) {
         std::cerr << MISSING_COMMA_COMMAND << std::endl;
         return -1;
     }
@@ -35,11 +34,12 @@ int main (int argc, char* argv[])
     }
 
 
-    std::vector<std::vector<std::string>> words;
+    std::vector<std::vector<std::string>> rows_vector;
     std::vector<std::string> head;
 
     std::string line;
     std::fstream file(file_path);
+
 
     if (!file.is_open())
     {
@@ -57,14 +57,19 @@ int main (int argc, char* argv[])
     {
             std::vector<std::string> row;
             ctj.ExtractWords(line, row,  seperator);
-            words.push_back(row);
+            rows_vector.push_back(row);
     }
 
-    for (auto& item : words)
+    /*
+        for (auto& item : words)
     {
-            ctj.PrintOut(head, item);
+           ctj.PrintOut(head, item);
     }
+    */
+
+    ctj.SaveAsJson(head, rows_vector);
 
 
+    file.close();
     return 0;
 }
